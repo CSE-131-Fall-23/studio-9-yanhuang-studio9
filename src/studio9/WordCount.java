@@ -7,7 +7,8 @@ import java.util.Map;
 
 import support.cse131.NotYetImplementedException;
 
-public class WordCount {
+public class WordCount
+{
 	/**
 	 * Constructs and returns a map of the distinct words in the specified list with
 	 * each word associated with its accumulated count (that is: the number of
@@ -28,15 +29,16 @@ public class WordCount {
 	 * @return a map which contains all of the distinct words as keys, each
 	 *         associated with the number of occurrences of the word
 	 */
-	public static Map<String, Integer> countWords(List<String> words) {
-
+	public static Map<String, Integer> countWords(List<String> words)
+	{
 		// FIXME
-		throw new NotYetImplementedException();
-
+		Map<String, Integer> wordCountMap = new HashMap<>();
+		for(String word:words) wordCountMap.put(word,wordCountMap.getOrDefault(word,0)+1);
+        return wordCountMap;
 	}
 	
-	public static void main(String[] args) {
-		
+	public static void main(String[] args)
+	{
 		List<String> wordList = new LinkedList<>();
 		wordList.add("to");
 		wordList.add("be");
@@ -48,5 +50,7 @@ public class WordCount {
 		
 		//TODO: Write code that will iterate over the words map
 		//to verify its contents
+		for(Map.Entry<String, Integer> entry : words.entrySet())
+            System.out.println("Key: "+entry.getKey()+", Value: "+entry.getValue());
 	}
 }

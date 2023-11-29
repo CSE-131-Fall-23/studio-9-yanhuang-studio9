@@ -1,26 +1,33 @@
 package studio9;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
-public class Polynomial {
+public class Polynomial
+{
 	
 	private LinkedList<Double> list;
 
 	/**
 	 * Constructs a Polynomial with no terms yet.
 	 */
-	public Polynomial() {
+	public Polynomial()
+	{
 		//FIXME
+		list = new LinkedList<>();
 	}
-
 	
 	/**
 	 * 
 	 * @param coeff
 	 * @return polynomial with added term
 	 */
-	public void addTerm(double coeff) {
+	public void addTerm(double coeff)
+	{
 		//FIXME
+		list.add(coeff);
 	}
 	
 	/*
@@ -28,8 +35,19 @@ public class Polynomial {
 	 * 
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
-	public String toString() {
-		return ""; //FIXME
+	public String toString()
+	{
+		String result="";
+		for(int i=0; i<list.size()-1; i++)
+		{
+			if(list.get(i)!=0)
+			{
+				result+=list.get(i)+"x^"+(list.size()-i-1);
+				if(list.get(i+1)>0) result+="+";
+			}
+		}
+		result+=list.get(list.size()-1);
+		return result;//FIXME
 	}
 	
 	/**
@@ -37,13 +55,19 @@ public class Polynomial {
 	 * @param x
 	 * @return value of polynomial at that x
 	 */
-	public double evaluate(double x) {
-		return 0;//FIXME
+	public double evaluate(double x)
+	{
+		double result=0;
+		for(int i=0; i<=list.size()-1; i++) result+=list.get(i) * Math.pow(x,list.size()-i-1);
+		return result;//FIXME
 	}
 
 	
-	public Polynomial derivative() {
-		return null;//FIXME
+	public Polynomial derivative()
+	{
+		Polynomial result = new Polynomial();
+		for(int i=0; i<list.size()-1; i++) result.addTerm(list.get(i) * (list.size()-i-1));
+		return result;//FIXME
 	}
 	
 
@@ -96,5 +120,21 @@ public class Polynomial {
 
 		return this.list.equals(other.list);
 	}
-
+	/*
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+		int n=in.nextInt();
+		Polynomial poly = new Polynomial();
+		
+		for(int i=0; i<n; i++) poly.addTerm(in.nextDouble());
+		System.out.println(poly.toString());
+		
+		System.out.println(poly.derivative());
+		
+		double x=in.nextDouble();
+		System.out.println(poly.evaluate(x));
+	}
+	*/
 }
+
